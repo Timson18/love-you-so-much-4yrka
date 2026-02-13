@@ -568,30 +568,34 @@ body{
     function popConfetti(){
       confetti.innerHTML="";
       confetti.classList.add("on");
-      const pieces = 140;
-      for (let i=0;i<pieces;i++){
-        const p=document.createElement("i");
-        const left=Math.random()*100;
-        const w=6+Math.random()*10;
-        const h=10+Math.random()*16;
-        const dur=1.8+Math.random()*1.6;
-        const delay=Math.random()*0.35;
+      const pieces = 170;
+      // старт через rAF — плавнее в iOS
+      requestAnimationFrame(() => {
+        for (let i=0;i<pieces;i++){
+          const p=document.createElement("i");
+          const left=Math.random()*100;
+          const w=8+Math.random()*12;
+          const h=12+Math.random()*20;
+          const dur=2.2+Math.random()*1.8;
+          const delay=Math.random()*0.25;
 
-        p.style.left=left+"vw";
-        p.style.width=w+"px";
-        p.style.height=h+"px";
-        p.style.opacity=(0.55+Math.random()*0.35).toFixed(2);
-        p.style.animationDuration=dur+"s";
-        p.style.animationDelay=delay+"s";
+          p.style.left=left+"vw";
+          p.style.width=w+"px";
+          p.style.height=h+"px";
+          p.style.opacity=(0.55+Math.random()*0.35).toFixed(2);
+          p.style.animationDuration=dur+"s";
+          p.style.animationDelay=delay+"s";
 
-        const tint = Math.random();
-        if (tint < 0.33) p.style.background = "rgba(255,255,255,.85)";
-        else if (tint < 0.66) p.style.background = "rgba(255,77,141,.85)";
-        else p.style.background = "rgba(255,210,226,.9)";
+          const tint = Math.random();
+          if (tint < 0.33) p.style.background = "rgba(255,255,255,.85)";
+          else if (tint < 0.66) p.style.background = "rgba(255,77,141,.85)";
+          else p.style.background = "rgba(255,210,226,.9)";
 
-        confetti.appendChild(p);
-      }
-      setTimeout(()=>confetti.classList.remove("on"), 2200);
+          confetti.appendChild(p);
+        }
+      });
+
+      setTimeout(()=>confetti.classList.remove("on"), 2600);
     }
 
     let opened=false;
