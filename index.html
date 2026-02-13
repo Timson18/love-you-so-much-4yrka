@@ -476,7 +476,7 @@ body{
 
           <p id="message">
             Спасибо тебе за улыбку, за поддержку и за то, что рядом с тобой обычные дни становятся особенными.
-            Я очень ценю тебя. 💖
+            Я очень ценю тебя. 💖 Оставайся такой же красивой, как на моей любимой фотографии.
           </p>
 
           <div class="chips" aria-hidden="true">
@@ -484,13 +484,7 @@ body{
             <div class="chip">Моё вдохновение</div>
             <div class="chip">Самая красивая</div>
           </div>
-
-          <div class="cta">
-            <button id="kissBtn">Воздушный поцелуй 💋</button>
-            <button id="againBtn">Ещё конфетти ✨</button>
-          </div>
-
-          <div class="tiny" id="tinyText">P.S. Ты мне очень дорога 🤍</div>
+<div class="tiny" id="tinyText">P.S. Ты мне очень дорога 🤍</div>
         </div>
       </div>
     </div>
@@ -502,7 +496,7 @@ body{
     const TEXT = {
       headline: "Ты — моё самое тёплое счастье",
       message:
-        "Спасибо тебе за улыбку, за поддержку и за то, что рядом с тобой обычные дни становятся особенными. Я очень ценю тебя. 💖",
+        "Спасибо тебе за улыбку, за поддержку и за то, что рядом с тобой обычные дни становятся особенными. Я очень ценю тебя. 💖 Оставайся такой же красивой, как на моей любимой фотографии.",
       tiny: "P.S. Ты мне очень дорога 🤍",
       kiss: "Муа! 💋💘",
     };
@@ -624,20 +618,15 @@ body{
     document.getElementById("closeBtn").addEventListener("touchstart", closeCard, { passive: true });
     overlay.addEventListener("click", (e)=>{ if(e.target === overlay) closeCard(); });
     overlay.addEventListener("touchstart", (e)=>{ if(e.target === overlay) closeCard(); }, { passive: true });
-
-    document.getElementById("againBtn").addEventListener("click", (e)=>{ e.stopPropagation(); popConfetti(); });
-    document.getElementById("againBtn").addEventListener("touchstart", (e)=>{ e.stopPropagation(); popConfetti(); }, { passive: true });
-    document.getElementById("kissBtn").addEventListener("click", (e)=>{
-      e.stopPropagation();
-      popConfetti();
+popConfetti(); });
+popConfetti(); }, { passive: true });
+popConfetti();
       const tiny=document.getElementById("tinyText");
       const prev=tiny.textContent;
       tiny.textContent=TEXT.kiss;
       setTimeout(()=>tiny.textContent=prev, 1100);
     });
-    document.getElementById("kissBtn").addEventListener("touchstart", (e)=>{
-      e.stopPropagation();
-      popConfetti();
+popConfetti();
       const tiny=document.getElementById("tinyText");
       const prev=tiny.textContent;
       tiny.textContent=TEXT.kiss;
