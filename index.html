@@ -44,7 +44,7 @@
     @keyframes twinkle { from{opacity:.20} to{opacity:.42} }
 
     /* ✅ Красивые фоновые сердечки (SVG) */
-    .bg-hearts{ position:fixed; inset:0; pointer-events:none; overflow:hidden; }
+    .bg-hearts{ position:fixed; inset:0; pointer-events:none; overflow:hidden; ; z-index:0 }
     .bg-hearts .h{
       position:absolute;
       bottom:-90px;
@@ -60,7 +60,7 @@
       to{ transform: translateY(-120vh) translateX(var(--drift, 0px)) scale(1.25) rotate(var(--rot, 0deg)); opacity:0; }
     }
 
-    .wrap{ height:100%; display:grid; place-items:center; padding:24px; }
+    .wrap{ height:100%; display:grid; place-items:center; padding:24px; ; position:relative; z-index:1 }
     .title{
       position:absolute; top:18px; left:50%; transform:translateX(-50%);
       width:min(720px, calc(100% - 40px)); text-align:center;
@@ -74,19 +74,6 @@
     }
 
     .stage{ width:min(520px, 92vw); aspect-ratio: 4 / 3.2; position:relative; transform: translateY(16px); }
-    .hint{
-      position:absolute; bottom:-52px; left:50%; transform:translateX(-50%);
-      color:rgba(255,255,255,.75); font-size:14px;
-      display:flex; gap:10px; align-items:center; user-select:none;
-    }
-    .hint kbd{
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.16);
-      padding:6px 10px; border-radius: 10px;
-      box-shadow: 0 10px 24px rgba(0,0,0,.25);
-      font-size:13px;
-    }
-
     .envelope{
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
@@ -427,10 +414,6 @@ body{
         <div class="paper"><div class="shine"></div></div>
         <div class="seal" aria-hidden="true"><div class="heart"></div></div>
       </div>
-
-      <div class="hint">
-        <kbd>Клик</kbd> или <kbd>Enter</kbd> — открыть
-      </div>
     </div>
 
     <div class="overlay" id="overlay" aria-hidden="true">
@@ -536,15 +519,14 @@ body{
 
     // ✅ SVG heart for background
     function heartSVG(fill1, fill2) {
+      // iOS Safari can glitch when many inline SVGs reuse the same gradient ids.
+      // So we draw a simple heart without <defs>/<linearGradient>.
       return `
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="${fill1}"/>
-              <stop offset="1" stop-color="${fill2}"/>
-            </linearGradient>
-          </defs>
-          <path fill="url(#hg)" d="M32 56 C32 56 6 40 6 22 C6 12 14 6 22 6 C27 6 31 9 32 12 C33 9 37 6 42 6 C50 6 58 12 58 22 C58 40 32 56 32 56Z"/>
+          <path d="M32 56 C32 56 6 40 6 22 C6 12 14 6 22 6 C27 6 31 9 32 12 C33 9 37 6 42 6 C50 6 58 12 58 22 C58 40 32 56 32 56Z"
+                fill="${fill2}" opacity="0.95"/>
+          <path d="M20 16 C20 12 23 9 27 9 C30 9 32 10 33 12 C29 12 24 14 22 18 C21 20 20 22 20 24 C19 22 20 19 20 16Z"
+                fill="${fill1}" opacity="0.35"/>
         </svg>`;
     }
 
